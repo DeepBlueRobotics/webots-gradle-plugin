@@ -13,7 +13,7 @@ class WebotsPluginTest extends Specification {
     def project = ProjectBuilder.builder().build()
 
     def setup() {
-        project.plugins.apply("org.carlmontrobotics.gradle.webots")
+        project.plugins.apply("org.carlmontrobotics.webots")
     }
 
     def "plugin adds webots extension named webots"() {

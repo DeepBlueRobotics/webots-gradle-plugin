@@ -19,7 +19,7 @@ class WebotsPluginFunctionalTest extends Specification {
         new File(projectDir, "settings.gradle") << ""
         new File(projectDir, "build.gradle") << """
             plugins {
-                id('org.carlmontrobotics.gradle.webots')
+                id('org.carlmontrobotics.webots')
             }
 
             task('printWebotsNativeLibs') {
@@ -60,7 +60,7 @@ class WebotsPluginFunctionalTest extends Specification {
         new File(projectDir, "settings.gradle") << ""
         new File(projectDir, "build.gradle") << """
             plugins {
-                id('org.carlmontrobotics.gradle.webots')
+                id('org.carlmontrobotics.webots')
             }
 
             task('printWebotsHome') {
