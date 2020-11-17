@@ -32,24 +32,24 @@ dependencies {
     testImplementation 'commons-io:commons-io:2.8.0'
 }
 
-// gradlePlugin {
-//     // Define the plugin
-//     plugins {
-//         webots {
-//             id = 'org.carlmontrobotics.gradle.webots'
-//             displayName = 'Webots Plugin'
-//             description = 'A plugin that simplifies developing Java code that uses your local Webots installation.'
-//             implementationClass = 'org.carlmontrobotics.gradle.WebotsPlugin'
-//         }
-//     }
-// }
+gradlePlugin {
+    // Define the plugin
+    plugins {
+        webots {
+            id = 'org.carlmontrobotics.gradle.webots'
+            displayName = 'Webots Plugin'
+            description = 'A plugin that simplifies developing Java code that uses your local Webots installation.'
+            implementationClass = 'org.carlmontrobotics.gradle.WebotsPlugin'
+        }
+    }
+}
 
 // Info for publishing to the Gradle Plugin Portal
-pluginBundle {
-    website = 'https://github.com/DeepBlueRobotics/webots-gradle-plugin' 
-    vcsUrl = 'https://github.com/DeepBlueRobotics/webots-gradle-plugin.git' 
-    tags = ['webots']     
-}
+// pluginBundle {
+//     website = 'https://github.com/DeepBlueRobotics/webots-gradle-plugin' 
+//     vcsUrl = 'https://github.com/DeepBlueRobotics/webots-gradle-plugin.git' 
+//     tags = ['webots']     
+// }
 
 // Info for publishing to GitHub Packages
 publishing {
