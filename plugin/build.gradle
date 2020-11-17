@@ -63,11 +63,11 @@ publishing {
             }
         }
     }
-    publications {
-        gpr(MavenPublication) {
-            from(components.java)
-        }
-    }
+    // publications {
+    //     gpr(MavenPublication) {
+    //         from(components.java)
+    //     }
+    // }
 }
 
 // Add a source set for the functional test suite
