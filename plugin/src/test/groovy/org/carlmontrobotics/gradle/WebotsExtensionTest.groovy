@@ -18,17 +18,6 @@ class WebotsExtensionTest extends Specification {
     def "on #os nativeLibs returns collection of native libs"(String os) {
         given:
         def fakeWebotsHome = new File("build/tmp/extensiontest/fakewebotshome")
-        // FileUtils.deleteDirectory(fakeWebotsHome)
-        // dllDir.mkdirs()
-        // new File(dllDir, "test.dll") << ""
-        // new File(dllDir, "test.so") << ""
-        // new File(dllDir, "test.so.1.0") << ""
-        // new File(dllDir, "test.dylib") << ""
-        // new File(dllDir, "test.jnilib") << ""
-        // msys64Dir.mkdirs()
-        // new File(msys64Dir, "test.dll") << ""
-        // msys64CppDir.mkdirs()
-        // new File(msys64CppDir, "test.dll") << ""
         def project = ProjectBuilder.builder().build()
 
         Sys sys = Stub() { 

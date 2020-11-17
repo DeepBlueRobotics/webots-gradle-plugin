@@ -11,6 +11,47 @@ import org.gradle.testkit.runner.GradleRunner
  * A simple functional test for the 'org.carlmontrobotics.gradle.greeting' plugin.
  */
 class WebotsPluginFunctionalTest extends Specification {
+    def "finds dlls in Webots installation"() { 
+        given:
+        def projectDir = new File("build/functionalTest")
+        FileUtils.deleteDirectory(projectDir)
+        projectDir.mkdirs()
+        new File(projectDir, "settings.gradle") << ""
+        new File(projectDir, "build.gradle") << """
+            plugins {
+                id('org.carlmontrobotics.gradle.webots')
+            }
+
+            task('printWebotsNativeLibs') {
+                webots.nativeLibs.each { File f ->
+                    println f.name
+                }
+            }
+        """
+        def fakeWebotsHome = new File(projectDir, "fakewebotshome")
+        def dllDir = new File(fakeWebotsHome, "lib/controller")
+        dllDir.mkdirs()
+        new File(dllDir, "fakelib1.dll") << ""
+        new File(dllDir, "fakelib1.so") << ""
+        new File(dllDir, "fakelib1.dylib") << ""
+        new File(dllDir, "fakelib2.dll") << ""
+        new File(dllDir, "fakelib2.sp") << ""
+        new File(dllDir, "fakelib2.dylib") << ""
+
+        when:
+        def runner = GradleRunner.create()
+        runner.forwardOutput()
+        runner.withPluginClasspath()
+        runner.withEnvironment([WEBOTS_HOME: fakeWebotsHome.absolutePath])
+        runner.withArguments("clean", "printWebotsNativeLibs")
+        runner.withProjectDir(projectDir)
+        def result = runner.build()
+
+        then:
+        result.output.contains("fakelib1")
+        result.output.contains("fakelib2")
+    }
+
     def "warns about missing Webots installation"() { 
         given:
         def projectDir = new File("build/functionalTest")
