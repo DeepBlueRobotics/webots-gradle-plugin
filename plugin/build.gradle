@@ -10,6 +10,12 @@ plugins {
     // Apply the Java Gradle plugin development plugin to add support for developing Gradle plugins
     id 'java-gradle-plugin'
 
+    // Support generating Maven metadata for publishing
+    id 'maven-publish'
+
+    // Support publishing to the Gradle Plugin Portal
+    id 'com.gradle.plugin-publish' version '0.12.0'
+
     // Apply the Groovy plugin to add support for Groovy
     id 'groovy'
 }
@@ -31,9 +37,18 @@ gradlePlugin {
     plugins {
         webots {
             id = 'org.carlmontrobotics.gradle.webots'
+            displayName = 'Webots Plugin'
+            description = 'A plugin that simplifies developing Java code that uses your local Webots installation.'
             implementationClass = 'org.carlmontrobotics.gradle.WebotsPlugin'
         }
     }
+}
+
+// Info for publishing to the Gradle Plugin Portal
+pluginBundle {
+    website = 'https://github.com/DeepBlueRobotics/webots-gradle-plugin' 
+    vcsUrl = 'https://github.com/DeepBlueRobotics/webots-gradle-plugin.git' 
+    tags = ['webots']     
 }
 
 // Add a source set for the functional test suite
