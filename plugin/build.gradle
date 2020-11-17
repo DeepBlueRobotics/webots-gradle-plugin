@@ -51,6 +51,25 @@ pluginBundle {
     tags = ['webots']     
 }
 
+// Info for publishing to GitHub Packages
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/DeepBlueRobotics/webots-gradle-plugin")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
 // Add a source set for the functional test suite
 sourceSets {
     functionalTest {
