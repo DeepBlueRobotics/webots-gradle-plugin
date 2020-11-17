@@ -38,7 +38,7 @@ gradlePlugin {
     // Define the plugin
     plugins {
         webots {
-            id = 'org.carlmontrobotics.gradle.webots'
+            id = 'org.carlmontrobotics.webots'
             displayName = 'Webots Plugin'
             description = 'A plugin that simplifies developing Java code that uses your local Webots installation.'
             implementationClass = 'org.carlmontrobotics.gradle.WebotsPlugin'
