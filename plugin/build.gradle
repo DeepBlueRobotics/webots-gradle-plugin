@@ -32,6 +32,8 @@ dependencies {
     testImplementation 'commons-io:commons-io:2.8.0'
 }
 
+group 'org.carlmontrobotics'
+
 gradlePlugin {
     // Define the plugin
     plugins {
