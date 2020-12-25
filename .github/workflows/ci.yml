@@ -45,7 +45,8 @@ jobs:
     - name: Compute next semantic version
       id: version
       uses: paulhatch/semantic-version@v3.2
-      branch: "main"
+      with:
+        branch: "main"
 
     - name: Tag
       run: git tag ${{ steps.version.outputs.version_tag }}
