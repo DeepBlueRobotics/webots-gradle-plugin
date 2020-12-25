@@ -8,7 +8,7 @@ import org.apache.commons.io.FileUtils
 import org.gradle.testkit.runner.GradleRunner
 
 /**
- * A simple functional test for the 'org.carlmontrobotics.gradle.greeting' plugin.
+ * Functional tests for the 'org.carlmontrobotics.webots' plugin.
  */
 class WebotsPluginFunctionalTest extends Specification {
     def "finds dlls in Webots installation"() { 
