@@ -28,7 +28,7 @@ class WebotsPluginTest extends Specification {
             .withType(FlatDirectoryArtifactRepository)
             .each({ FlatDirectoryArtifactRepository fdar -> 
                 fdar.dirs.each({ File f ->
-                    if (f.path.endsWith("/lib/controller/java")) {
+                    if (f.path.endsWith("/lib/controller/java".replace('/', File.separator))) {
                         matches++
                     }
                 })
