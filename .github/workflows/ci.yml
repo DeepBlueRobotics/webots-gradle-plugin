@@ -46,10 +46,10 @@ jobs:
       id: version
       uses: paulhatch/semantic-version@v3.2
 
-    -name: Tag
+    - name: Tag
       run: git tag ${{ steps.version.outputs.version_tag }}
     
-    -name: Push
+    - name: Push
       run: git push
 
     - name: Publish to Gradle Plugin Portal
