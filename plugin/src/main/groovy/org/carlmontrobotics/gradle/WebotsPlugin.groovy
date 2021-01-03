@@ -20,5 +20,8 @@ class WebotsPlugin implements Plugin<Project> {
         project.repositories.flatDir([ dirs: ldpath + "/java"])
         def controllerJar = project.files(ldpath + "/java/Controller.jar")
         project.dependencies.add("implementation", controllerJar)
+        project.tasks.matching({ task -> task.metaClass.respondsTo(task, "environment", String, String) }).all { GroovyObject t -> 
+            t.metaClass.pickMethod("environment", String, String).invoke(t, "LD_LIBRARY_PATH", ldpath + ":" + ldpath+"/java" + ":" + webots.home+"/lib/webots")
+        }
     }
 }
