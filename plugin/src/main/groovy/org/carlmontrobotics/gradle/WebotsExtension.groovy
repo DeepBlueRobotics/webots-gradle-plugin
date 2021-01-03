@@ -51,6 +51,7 @@ class WebotsExtension {
                 dirs_to_check.add "/usr/local/webots"
                 dirs_to_check.add "/snap/webots/current/usr/share/webots"
             } else if (sys.osIsMacOsX()) {
+                dirs_to_check.add sys.getenv("HOME") + "/Applications/Webots.app"
                 dirs_to_check.add "/Applications/Webots.app"
             } else if (sys.osIsWindows()) {
                 dirs_to_check.add sys.getenv("USER_HOME") + "/Webots"

@@ -91,7 +91,8 @@ class WebotsExtensionTest extends Specification {
         os        | path                                        | env
         "Linux"   | "/usr/local/webots"                         | [:]
         "Linux"   | "/snap/webots/current/usr/share/webots"     | [:]
-        "MacOS"   | "/Applications/Webots.app"                  | [:]
+        "MacOS"   | "/Applications/Webots.app"                  | [HOME: "/Users/name"]
+        "MacOS"   | "/Users/name/Applications/Webots.app"       | [HOME: "/Users/name"]
         "Windows" | "/Users/home/Webots"                        | [USER_HOME: "/Users/home"]
         "Windows" | "/Users/name/AppData/Local/Programs/Webots" | [LOCALAPPDATA: "/Users/name/AppData/Local"]
     }
