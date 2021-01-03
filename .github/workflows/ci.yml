@@ -70,13 +70,13 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       run: |
         xvfb-run -d webots &
-        ./gradlew build
+        ./gradlew build --info
 
     - name: Build with Gradle (not ubuntu-latest)
       if: matrix.os != 'ubuntu-latest'
       run: |
         webots &
-        ./gradlew build
+        ./gradlew build --info
       shell: bash
 
   release:
