@@ -38,4 +38,5 @@ application {
 tasks.named('test') {
     // Use junit platform for unit tests.
     useJUnitPlatform()
+    dependsOn(gradle.includedBuild('plugin').task(':test'))
 }

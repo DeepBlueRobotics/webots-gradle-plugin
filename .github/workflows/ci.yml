@@ -13,11 +13,49 @@ jobs:
   build:
     strategy: 
       matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
-
+        os: [ windows-latest, macos-latest, ubuntu-latest ]
+        webotsUrl: [ "https://github.com/cyberbotics/webots/releases/download/R2021a/" ]
+        include:
+          - os: windows-latest
+            webotsPkg: "webots-R2021a_setup.exe"
+          - os: macos-latest
+            webotsPkg: "webots-R2021a.dmg"
+          - os: ubuntu-latest
+            webotsPkg: "webots_2021a_amd64.deb"
     runs-on: ${{ matrix.os }}
 
     steps:
+    - name: Cache Webots download
+      id: cache-webots-download
+      uses: actions/cache@v2
+      with:
+        path: ${{ matrix.webotsPkg }}
+        key: ${{ matrix.os }}-webots-2021a-${{ matrix.webotsPkg }}
+
+    - name: Download Webots
+      if: steps.cache-webots-download.outputs.cache-hit != 'true'
+      run: curl -L -O ${{ format('{0}{1}', matrix.webotsUrl, matrix.webotsPkg) }}
+
+    - name: Install Webots (ubuntu-latest)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt install ./${{ matrix.webotsPkg }}
+
+    - name: Install Webots (macos-latest)
+      if: matrix.os == 'macos-latest'
+      run: |
+        mkdir ~/Mount
+        hdiutil attach ${{ matrix.webotsPkg }} -mountpoint ~/Mount
+        cp -r ~/Mount/Webots.app ~/Applications
+        hdiutil detach ~/Mount
+        rmdir ~/Mount
+
+    - name: Install Webots (windows-latest)
+      if: matrix.os == 'windows-latest'
+      run: |
+        ./${{ matrix.webotsPkg }} //VERYSILENT //SP- //SUPPRESSMSGBOXES //CURRENTUSER
+      shell: bash
+
     - name: checkout
       uses: actions/checkout@v2
       with:
@@ -28,8 +66,17 @@ jobs:
       with:
         java-version: 1.8
 
-    - name: Build with Gradle
-      run: ./gradlew build
+    - name: Build with Gradle (ubuntu-latest)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        xvfb-run -a webots &
+        xvfb-run -a ./gradlew build --info
+
+    - name: Build with Gradle (not ubuntu-latest)
+      if: matrix.os != 'ubuntu-latest'
+      run: |
+        webots &
+        ./gradlew build --info
       shell: bash
 
   release:
