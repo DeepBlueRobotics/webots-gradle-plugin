@@ -55,7 +55,7 @@ jobs:
       run: |
         mkdir ~/Mount
         hdiutil attach ${{ matrix.webotsPkg }} -mountpoint ~/Mount
-        cp -r ~/Mount/Webots.app ~/Applications
+        cp -R ~/Mount/Webots.app ~/Applications
         hdiutil detach ~/Mount
         rmdir ~/Mount
         ls -lR ~/Applications
