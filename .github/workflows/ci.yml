@@ -72,13 +72,13 @@ jobs:
         export LIBGL_ALWAYS_SOFTWARE=true
         export WEBOTS_DISABLE_SAVE_SCREEN_PERSPECTIVE_ON_CLOSE=true
         xvfb-run -a webots --stdout --stderr --minimize --batch --mode=fast &
-        xvfb-run -a ./gradlew build --info
+        xvfb-run -a ./gradlew build --info --stacktrace
 
     - name: Build with Gradle (not ubuntu-latest)
       if: matrix.os != 'ubuntu-latest'
       run: |
         webots --stdout --stderr --minimize --batch --mode=fast &
-        ./gradlew build --info
+        ./gradlew build --info --stacktrace
       shell: bash
 
   release:
