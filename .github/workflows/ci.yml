@@ -59,7 +59,7 @@ jobs:
         rmdir ~/Mount
         ls ~/Applications/Webots.app
         ls ~/Applications/Webots.app/webots
-        ~/Applications/Webots.app/webots --stdout --stderr --minimize --batch --mode=fast ./app/Webots/worlds/Empty.wbt &
+        ~/Applications/Webots.app/bin/webots --stdout --stderr --minimize --batch --mode=fast ./app/Webots/worlds/Empty.wbt &
 
     - name: Install and start Webots (windows-latest)
       if: matrix.os == 'windows-latest'
