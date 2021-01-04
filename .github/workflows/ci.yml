@@ -71,13 +71,13 @@ jobs:
       run: |
         export LIBGL_ALWAYS_SOFTWARE=true
         export WEBOTS_DISABLE_SAVE_SCREEN_PERSPECTIVE_ON_CLOSE=true
-        xvfb-run -a webots --stdout --stderr --minimize --batch --mode=fast ./Webots/worlds/Empty.wbt &
+        xvfb-run -a webots --stdout --stderr --minimize --batch --mode=fast ./app/Webots/worlds/Empty.wbt &
         xvfb-run -a ./gradlew build --info --stacktrace
 
     - name: Build with Gradle (not ubuntu-latest)
       if: matrix.os != 'ubuntu-latest'
       run: |
-        webots --stdout --stderr --minimize --batch --mode=fast ./Webots/worlds/Empty.wbt &
+        webots --stdout --stderr --minimize --batch --mode=fast ./app/Webots/worlds/Empty.wbt &
         ./gradlew build --info --stacktrace
       shell: bash
 
