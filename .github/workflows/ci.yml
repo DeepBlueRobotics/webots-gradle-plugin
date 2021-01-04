@@ -68,6 +68,9 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: |
         ./${{ matrix.webotsPkg }} //VERYSILENT //SP- //SUPPRESSMSGBOXES //CURRENTUSER
+        curl -L -o Mesa.7z https://downloads.fdossena.com/geth.php?r=mesa64-latest
+        7z e -o${LOCALAPPDATA}/Programs/Webots/msys64/mingw64/bin Mesa.7z
+        export MESA_GL_VERSION_OVERRIDE=3.3
         export LIBGL_ALWAYS_SOFTWARE=true
         export WEBOTS_DISABLE_SAVE_SCREEN_PERSPECTIVE_ON_CLOSE=true
         ${LOCALAPPDATA}/Programs/Webots/msys64/mingw64/bin/webots --no-rendering --stdout --stderr --minimize --batch --mode=fast ./app/Webots/worlds/Empty.wbt &
