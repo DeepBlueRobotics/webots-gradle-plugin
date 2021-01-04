@@ -9,7 +9,6 @@ import com.cyberbotics.webots.controller.Robot;
 public class App {
 
     public Robot createRobot() {
-        System.out.println("LD_LIBRARY_PATH=" + System.getenv("LD_LIBRARY_PATH"));
         System.out.println("Creating Robot");
         Robot robot = new Robot();
         System.out.println("Robot created");
@@ -20,6 +19,6 @@ public class App {
     }
 
     public static void main(String[] args) {
-        Robot robot = new App().createRobot();
+        new App().createRobot();
     }
 }
