@@ -70,7 +70,7 @@ jobs:
         ./${{ matrix.webotsPkg }} //VERYSILENT //SP- //SUPPRESSMSGBOXES //CURRENTUSER
         export LIBGL_ALWAYS_SOFTWARE=true
         export WEBOTS_DISABLE_SAVE_SCREEN_PERSPECTIVE_ON_CLOSE=true
-        ${LOCALAPPDATA}/Programs/Webots/msys64/mingw64/bin/webotsw --no-rendering --stdout --stderr --minimize --batch --mode=fast ./app/Webots/worlds/Empty.wbt &
+        ${LOCALAPPDATA}/Programs/Webots/msys64/mingw64/bin/webots --no-rendering --stdout --stderr --minimize --batch --mode=fast ./app/Webots/worlds/Empty.wbt &
         echo "Sleeping for 5 secs"
         sleep 5
         echo "Done sleeping"
