@@ -80,6 +80,8 @@ jobs:
       shell: bash
 
   release:
+    # Only release from the main branch
+    if: github.ref == "refs/heads/main"
     needs: build
     runs-on: ubuntu-latest
 
