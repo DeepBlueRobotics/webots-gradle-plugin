@@ -67,7 +67,7 @@ jobs:
         ./${{ matrix.webotsPkg }} //VERYSILENT //SP- //SUPPRESSMSGBOXES //CURRENTUSER
         export LIBGL_ALWAYS_SOFTWARE=true
         export WEBOTS_DISABLE_SAVE_SCREEN_PERSPECTIVE_ON_CLOSE=true
-        ${LOCALAPPDATA}/Programs/Webots/bin/webots --stdout --stderr --minimize --batch --mode=fast ./app/Webots/worlds/Empty.wbt &
+        ${LOCALAPPDATA}/Programs/Webots/msys64/mingw64/bin/webotsw --stdout --stderr --minimize --batch --mode=fast ./app/Webots/worlds/Empty.wbt &
       shell: bash
 
     - name: Set up JDK 11
