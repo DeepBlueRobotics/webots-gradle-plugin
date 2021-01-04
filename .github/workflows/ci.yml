@@ -35,7 +35,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ${{ matrix.webotsPkg }}
-        key: ${{ matrix.os }}-webots-2021a-${{ matrix.webotsPkg }}
+        key: ${{ matrix.os }}-webots-v2021a-${{ matrix.webotsPkg }}
 
     - name: Download Webots
       if: steps.cache-webots-download.outputs.cache-hit != 'true'
