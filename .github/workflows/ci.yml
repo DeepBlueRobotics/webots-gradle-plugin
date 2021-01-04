@@ -77,7 +77,7 @@ jobs:
     - name: Build with Gradle (not ubuntu-latest)
       if: matrix.os != 'ubuntu-latest'
       run: |
-        webots --stdout --stderr --minimize --batch --mode=fast &
+        webots --stdout --stderr --minimize --batch --mode=fast ./Webots/worlds/Empty.wbt &
         ./gradlew build --info --stacktrace
       shell: bash
 
