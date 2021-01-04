@@ -21,7 +21,27 @@ class WebotsPlugin implements Plugin<Project> {
         def controllerJar = project.files(ldpath + "/java/Controller.jar")
         project.dependencies.add("implementation", controllerJar)
         project.tasks.matching({ task -> task.metaClass.respondsTo(task, "environment", String, String) }).all { GroovyObject t -> 
-            t.metaClass.pickMethod("environment", String, String).invoke(t, "LD_LIBRARY_PATH", ldpath + ":" + ldpath+"/java" + ":" + webots.home+"/lib/webots")
+            if (OperatingSystem.current().isLinux()) {
+                t.metaClass.pickMethod("environment", String, String).invoke(t, "LD_LIBRARY_PATH", String.join(":",
+                    System.getenv("LD_LIBRARY_PATH"),
+                    ldpath,
+                    ldpath + "/java",
+                    webots.home + "/lib/webots"))
+            } else if (OperatingSystem.current().isMacOsX()) {
+                t.metaClass.pickMethod("environment", String, String).invoke(t, "DYLD_LIBRARY_PATH", String.join(":",
+                    System.getenv("DYLD_LIBRARY_PATH"),
+                    ldpath,
+                    ldpath + "/java",
+                    webots.home + "/lib/webots"))
+            } else if (OperatingSystem.current().isWindows()) {
+                t.metaClass.pickMethod("environment", String, String).invoke(t, "PATH", String.join(";",
+                    System.getenv("PATH"),
+                    ldpath,
+                    ldpath + "/java",
+                    webots.home+"/lib/webots",
+                    webots.home + "/msys64/mingw64/bin",
+                    webots.home + "/msys64/mingw64/bin/cpp"))
+            }
         }
     }
 }
