@@ -25,6 +25,11 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+    - name: Checkout source
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
     - name: Cache Webots download
       id: cache-webots-download
       uses: actions/cache@v2
@@ -35,11 +40,6 @@ jobs:
     - name: Download Webots
       if: steps.cache-webots-download.outputs.cache-hit != 'true'
       run: curl -L -O ${{ format('{0}{1}', matrix.webotsUrl, matrix.webotsPkg) }}
-
-    - name: Checkout source
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
 
     - name: Install and start Webots (ubuntu-latest)
       if: matrix.os == 'ubuntu-latest'
