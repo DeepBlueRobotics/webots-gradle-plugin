@@ -54,12 +54,13 @@ jobs:
       if: matrix.os == 'macos-latest'
       run: |
         mkdir ~/Mount
+        mkdir -p ~/Applications
         hdiutil attach ${{ matrix.webotsPkg }} -mountpoint ~/Mount
         cp -R ~/Mount/Webots.app ~/Applications
         hdiutil detach ~/Mount
         rmdir ~/Mount
         ls -lR ~/Applications
-        ~/Applications/Webots.app/bin/webots --no-rendering --stdout --stderr --minimize --batch --mode=fast ./app/Webots/worlds/Empty.wbt &
+        ~/Applications/Webots.app/webots --no-rendering --stdout --stderr --minimize --batch --mode=fast ./app/Webots/worlds/Empty.wbt &
         echo "Sleeping for 5 secs"
         sleep 5
         echo "Done sleeping"
