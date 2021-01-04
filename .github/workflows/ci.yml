@@ -59,7 +59,6 @@ jobs:
         cp -R ~/Mount/Webots.app ~/Applications
         hdiutil detach ~/Mount
         rmdir ~/Mount
-        ls -lR ~/Applications
         ~/Applications/Webots.app/webots --no-rendering --stdout --stderr --minimize --batch --mode=fast ./app/Webots/worlds/Empty.wbt &
         echo "Sleeping for 5 secs"
         sleep 5
