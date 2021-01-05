@@ -34,6 +34,9 @@ class WebotsExtension {
     @Inject
     WebotsExtension(Project project, Sys sys = new DefaultSys()) {
         this.project = project
+        if (project.hasProperty(WebotsPlugin.SYS_FOR_TESTING_PROP)) {
+            sys = (Sys)project.findProperty(WebotsPlugin.SYS_FOR_TESTING_PROP)
+        }
 
         def log = LoggerFactory.getLogger('webots-plugin-logger')
         String envDelim = sys.osIsWindows() ? ";" : ":"
