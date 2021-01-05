@@ -14,3 +14,5 @@ This plugin:
 
 4. Provides a `webots.nativeLibs` property that is a `FileCollection` containing the native libraries that need to be loadable by an extern Webots controller. This can be useful if your build copies such libs to a single location referenced by the JVM's `java.library.path` system property.
 
+5. Add the directories containing the above native libraries to the OS-specific environment variable in the environments of Gradle tasks. This makes it possible to run controllers and controller tests from Gradle without needed to set the variable manually.
+
