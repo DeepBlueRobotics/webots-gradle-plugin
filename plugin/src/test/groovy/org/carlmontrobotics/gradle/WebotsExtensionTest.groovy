@@ -20,17 +20,16 @@ class WebotsExtensionTest extends Specification {
         def fakeWebotsHome = new File("build/tmp/extensiontest/fakewebotshome")
         def project = ProjectBuilder.builder().build()
 
-        Sys sys = Stub() { 
+        project.ext.set(WebotsPlugin.SYS_FOR_TESTING_PROP, Stub(Sys) { 
             getenv("WEBOTS_HOME") >> { fakeWebotsHome.path }
             pathExists(fakeWebotsHome.path) >> true
             osIsLinux() >> { os == "Linux" }
             osIsMacOsX() >> { os == "MacOS" }
             osIsWindows() >> { os == "Windows" }
-
-        }
+        })
 
         when:
-        def webots = new WebotsExtension(project, sys)
+        def webots = new WebotsExtension(project)
 
         then:
         def dllDir = new File(fakeWebotsHome, "lib/controller")
@@ -57,13 +56,13 @@ class WebotsExtensionTest extends Specification {
     def "home uses WEBOTS_HOME if set"() {
         given:
         def project = ProjectBuilder.builder().build()
-        Sys sys = Stub() { 
+        project.ext.set(WebotsPlugin.SYS_FOR_TESTING_PROP, Stub(Sys) { 
             getenv("WEBOTS_HOME") >> "/path/to/webots"
             pathExists("/path/to/webots") >> true
-        }
+        })
 
         when:
-        def webots = new WebotsExtension(project, sys)
+        def webots = new WebotsExtension(project)
 
         then:
         webots.home == "/path/to/webots"
@@ -73,16 +72,16 @@ class WebotsExtensionTest extends Specification {
     def "on #os home uses #path if webots found there"(String os, String path, Map<String, String> env) {
         given:
         def project = ProjectBuilder.builder().build()
-        Sys sys = Stub() { 
+        project.ext.set(WebotsPlugin.SYS_FOR_TESTING_PROP, Stub(Sys) { 
             getenv(_) >> { String key -> env[key] }
             osIsLinux() >> { os == "Linux" }
             osIsMacOsX() >> { os == "MacOS" }
             osIsWindows() >> { os == "Windows" }
             pathExists(_) >> { String p -> p == path }
-        }
+        })
 
         when:
-        def webots = new WebotsExtension(project, sys)
+        def webots = new WebotsExtension(project)
 
         then:
         webots.home == path
