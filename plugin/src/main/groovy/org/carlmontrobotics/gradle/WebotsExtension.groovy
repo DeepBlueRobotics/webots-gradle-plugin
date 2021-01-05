@@ -31,9 +31,14 @@ class WebotsExtension {
     ConfigurableFileCollection nativeLibs
 
     final Project project
+
     @Inject
-    WebotsExtension(Project project, Sys sys = new DefaultSys()) {
+    WebotsExtension(Project project) {
         this.project = project
+        Sys sys = new DefaultSys()
+        if (project.hasProperty(WebotsPlugin.SYS_FOR_TESTING_PROP)) {
+            sys = (Sys)project.findProperty(WebotsPlugin.SYS_FOR_TESTING_PROP)
+        }
 
         def log = LoggerFactory.getLogger('webots-plugin-logger')
         String envDelim = sys.osIsWindows() ? ";" : ":"

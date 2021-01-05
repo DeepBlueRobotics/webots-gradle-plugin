@@ -40,3 +40,13 @@ tasks.named('test') {
     useJUnitPlatform()
     dependsOn(gradle.includedBuild('plugin').task(':test'))
 }
+
+test {
+    testLogging {
+        info {
+            events "started", "skipped", "failed"
+            exceptionFormat "full"
+            showCauses true
+        }
+    }
+}

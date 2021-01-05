@@ -8,10 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
     @Test void appCreatesARobot() {
-        System.out.println("LD_LIBRARY_PATH=" + System.getenv("LD_LIBRARY_PATH"));
-        // assertEquals("expected", System.getenv("LD_LIBRARY_PATH"));
-        App classUnderTest = null;
-        classUnderTest = new App();
+        App classUnderTest = new App();
         assertNotNull(classUnderTest.createRobot(), "app should create a robot");
     }
 }
