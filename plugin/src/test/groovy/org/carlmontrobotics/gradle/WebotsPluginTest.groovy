@@ -84,7 +84,7 @@ class WebotsPluginTest extends Specification {
 
     @Unroll
     def "on #os plugin appends to #var with value of #orig"(String os, String var, String orig, String expected) {
-        def fakeWebotsHome = new File("/wh")
+        def fakeWebotsHome = new File("wh")
 
         given:
         project.ext.set(WebotsPlugin.SYS_FOR_TESTING_PROP, Stub(Sys) { 
@@ -107,11 +107,11 @@ class WebotsPluginTest extends Specification {
 
         where:
         os        | var                 | orig        | expected
-        "Linux"   | "LD_LIBRARY_PATH"   | null        | "/wh/lib/controller:/wh/lib/controller/java:/wh/lib/webots"
-        "Linux"   | "LD_LIBRARY_PATH"   | "/orig/lib" | "/orig/lib:/wh/lib/controller:/wh/lib/controller/java:/wh/lib/webots"
-        "MacOS"   | "DYLD_LIBRARY_PATH" | null        | "/wh/lib/controller:/wh/lib/controller/java:/wh/lib/webots"
-        "MacOS"   | "DYLD_LIBRARY_PATH" | "/orig/lib" | "/orig/lib:/wh/lib/controller:/wh/lib/controller/java:/wh/lib/webots"
-        "Windows" | "PATH"              | null        | "/wh/lib/controller;/wh/lib/controller/java;/wh/lib/webots;/wh/msys64/mingw64/bin;/wh/msys64/mingw64/bin/cpp"
-        "Windows" | "PATH"              | "/orig/lib" | "/orig/lib;/wh/lib/controller;/wh/lib/controller/java;/wh/lib/webots;/wh/msys64/mingw64/bin;/wh/msys64/mingw64/bin/cpp"
+        "Linux"   | "LD_LIBRARY_PATH"   | null        | "wh/lib/controller:wh/lib/controller/java:wh/lib/webots"
+        "Linux"   | "LD_LIBRARY_PATH"   | "/orig/lib" | "/orig/lib:wh/lib/controller:wh/lib/controller/java:wh/lib/webots"
+        "MacOS"   | "DYLD_LIBRARY_PATH" | null        | "wh/lib/controller:wh/lib/controller/java:wh/lib/webots"
+        "MacOS"   | "DYLD_LIBRARY_PATH" | "/orig/lib" | "/orig/lib:wh/lib/controller:wh/lib/controller/java:wh/lib/webots"
+        "Windows" | "PATH"              | null        | "wh/lib/controller;wh/lib/controller/java;wh/lib/webots;wh/msys64/mingw64/bin;wh/msys64/mingw64/bin/cpp"
+        "Windows" | "PATH"              | "/orig/lib" | "/orig/lib;wh/lib/controller;wh/lib/controller/java;wh/lib/webots;wh/msys64/mingw64/bin;wh/msys64/mingw64/bin/cpp"
     }
 }
