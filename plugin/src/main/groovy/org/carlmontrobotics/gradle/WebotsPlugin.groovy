@@ -51,8 +51,8 @@ class WebotsPlugin implements Plugin<Project> {
                     webots.home + "/msys64/mingw64/bin",
                     webots.home + "/msys64/mingw64/bin/cpp"])
             }
-            }
         }
+    }
 
     void addToDllPath(GroovyObject t, String dllPathVarName, String sep, List<String> paths) {
         List<String> newPaths = []
