@@ -54,6 +54,7 @@ class WebotsExtension {
             log.info "WEBOTS_HOME environment variable is not set, so looking for Webots installation."
             if (sys.osIsLinux()) {
                 dirs_to_check.add "/usr/local/webots"
+                dirs_to_check.add sys.getenv("HOME") + "/webots"
             } else if (sys.osIsMacOsX()) {
                 dirs_to_check.add sys.getenv("HOME") + "/Applications/Webots.app/Contents"
                 dirs_to_check.add "/Applications/Webots.app/Contents"
