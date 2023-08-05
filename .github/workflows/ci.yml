@@ -31,7 +31,8 @@ jobs:
 
     - name: Run Webots
       run: |
-        $RUN_WEBOTS ./app/Webots/worlds/Empty.wbt &
+        $RUN_WEBOTS "./app/Webots/worlds/Empty.wbt" &
+      shell: bash
 
     - name: Set up JDK 17
       uses: actions/setup-java@v3
