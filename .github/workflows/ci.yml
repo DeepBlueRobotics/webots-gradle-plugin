@@ -25,7 +25,7 @@ jobs:
 
     - name: Download Webots
       id: cache-webots-download
-      uses: actions/setup-webots@versioning-and-caching
+      uses: DeepBlueRobotics/setup-webots@versioning-and-caching
       with:
         path: ${{ matrix.webotsPkg }}
         key: ${{ matrix.os }}-webots-v2021a-${{ matrix.webotsPkg }}
