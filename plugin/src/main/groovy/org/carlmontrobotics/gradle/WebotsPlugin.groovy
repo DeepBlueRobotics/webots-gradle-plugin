@@ -14,7 +14,7 @@ class WebotsPlugin implements Plugin<Project> {
 
     static final String SYS_FOR_TESTING_PROP = "_sysForTesting"
     Sys sys
-    
+
     void apply(Project project) {
         sys = new DefaultSys()
         if (project.hasProperty(SYS_FOR_TESTING_PROP)) {
@@ -29,10 +29,10 @@ class WebotsPlugin implements Plugin<Project> {
         project.repositories.flatDir([ dirs: ldpath + "/java"])
         def controllerJar = project.files(ldpath + "/java/Controller.jar")
         project.dependencies.add("implementation", controllerJar)
-        project.tasks.matching({ task -> 
-            (task.metaClass.respondsTo(task, "environment", String, String) 
+        project.tasks.matching({ task ->
+            (task.metaClass.respondsTo(task, "environment", String, String)
             && task.metaClass.respondsTo(task, "getEnvironment"))
-        }).all { GroovyObject t -> 
+        }).all { GroovyObject t ->
             if (sys.osIsLinux()) {
                 addToDllPath(t, "LD_LIBRARY_PATH", ":", [
                     ldpath,
