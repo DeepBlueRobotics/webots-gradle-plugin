@@ -29,6 +29,10 @@ jobs:
       with:
         webotsVersion: R2023b
 
+    - name: Run Webots
+      run: |
+        $RUN_WEBOTS ./app/Webots/worlds/Empty.wbt &
+
     - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
