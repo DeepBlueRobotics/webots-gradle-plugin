@@ -25,7 +25,7 @@ jobs:
 
     - name: Download Webots
       id: cache-webots-download
-      uses: DeepBlueRobotics/setup-webots@versioning-and-caching
+      uses: DeepBlueRobotics/setup-webots@v2
       with:
         webotsVersion: R2023b
 
